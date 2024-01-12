@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap"
 import { Routes, Route, Navigate } from "react-router-dom"
 import './App.css'
 import NewNote from "./components/NewNote"
+import NoteList from "./components/NoteList"
 import { useLocalStorage } from "./components/useLocalStorage"
 import { useMemo } from "react"
 import { v4 as uuidV4 } from "uuid"
@@ -59,7 +60,7 @@ function addTag(tag: Tag) {
 
       <Routes>
         <Route path="/" element={
-          <h1>Hi</h1>
+          <NoteList />
         }>
 
         </Route>
