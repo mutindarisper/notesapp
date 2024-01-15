@@ -60,7 +60,7 @@ function addTag(tag: Tag) {
 
       <Routes>
         <Route path="/" element={
-          <NoteList />
+          <NoteList availableTags={tags} />
         }>
 
         </Route>
