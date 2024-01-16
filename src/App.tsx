@@ -101,6 +101,7 @@ function deleteTag(id: string) {
 
 
       <Routes>
+
         <Route path="/" element={
           <NoteList notes={noteWithTags}
            availableTags={tags}
@@ -109,19 +110,28 @@ function deleteTag(id: string) {
         }>
 
         </Route>
+
+
         <Route path="/new" element={
         <NewNote onSubmit={onCreateNote}
          onAddTag={addTag} 
          availableTags={tags} />}></Route>
+
+
+
         <Route path="/:id" element={<NoteLayout notes={noteWithTags } />}>
 
           <Route index element={<Note onDelete={onDeleteNote} />} />
+
           <Route path="edit" element={<EditNote
            onSubmit={onUpdateNote}
            onAddTag={addTag}
            availableTags={tags} />} />
 
         </Route>
+
+        
+
         <Route path="*" element={<Navigate to="/" />}></Route>
 
       </Routes>
