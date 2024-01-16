@@ -6,14 +6,21 @@ import { NoteData, Tag } from '../App'
 // import { useMemo } from "react"
 import { v4 as uuidV4 } from "uuid"
 
+
 type NoteFormProps = {
     onSubmit: (data: NoteData) => void
     onAddTag: (tag: Tag) => void
     availableTags: Tag[]
-}
+  } & Partial<NoteData>
 
+const NoteForm = ({onSubmit,
+     onAddTag,
+     availableTags, 
+     title="",
+     markdown = "",
+     tags = [],
 
-const NoteForm = ({onSubmit, onAddTag, availableTags} :NoteFormProps)  => {
+} :NoteFormProps)  => {
     const titleRef = useRef<HTMLInputElement>(null)
     const markdownRef = useRef<HTMLTextAreaElement>(null)
     const [selectedTags, setselectedTags] = useState<Tag[]>([])
@@ -22,8 +29,8 @@ const NoteForm = ({onSubmit, onAddTag, availableTags} :NoteFormProps)  => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
         onSubmit({
-            title: titleRef.current?.value,
-            markdown: markdownRef.current?.value,
+            title: titleRef.current!.value,
+            markdown: markdownRef.current!.value,
             tags: selectedTags
         })
         navigate("..")
@@ -35,7 +42,7 @@ const NoteForm = ({onSubmit, onAddTag, availableTags} :NoteFormProps)  => {
                 <Col>
                 <Form.Group controlId='title'>
                     <Form.Label>Title</Form.Label>
-                    <Form.Control required ref={titleRef}/>    
+                    <Form.Control required ref={titleRef} defaultValue={title}/>    
                 </Form.Group>
                 </Col>
                 
@@ -71,7 +78,7 @@ const NoteForm = ({onSubmit, onAddTag, availableTags} :NoteFormProps)  => {
 
             <Form.Group controlId='markdown'>
                     <Form.Label>Body</Form.Label>
-                    <Form.Control required as="textarea" ref={markdownRef} rows={15}/>    
+                    <Form.Control  defaultValue={markdown} required as="textarea" ref={markdownRef} rows={15}/>    
                 </Form.Group>
 
                 <Stack direction='horizontal' gap={2} className='justify-content-end'>
